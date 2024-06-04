@@ -2,7 +2,7 @@
 
 DB_TYPE=$1
 MYSQL_USER="localhost"
-MYSQL_PASSWORD="805021098uma"
+MYSQL_PASSWORD="password"
 MYSQL_DB="mysql_database"
 MYSQL_TABLE="tasks"
 MONGO_DB="mongo_database"
@@ -17,7 +17,7 @@ process_mysql() {
     mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -D "$MYSQL_DB" -sN -e "SELECT id, name, status, meta_data FROM $MYSQL_TABLE" | while read -r id name status meta_data
     do
         current_time=$(date "+%Y-%m-%d %H:%M:%S")
-        if [[ "$status" == "1" ]]; then
+        if [[ "$status" == "true" ]]; then
             echo "ID: $id, Name: $name, Status: true, Meta Data: $meta_data, Timestamp: $current_time" >> "$SUCCESS_TRACK_FILE"
         else
             echo "ID: $id, Name: $name, Status: false, Meta Data: $meta_data, Timestamp: $current_time" >> "$FAILURE_TRACK_FILE"
